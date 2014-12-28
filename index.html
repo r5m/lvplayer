@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="width = device-width, initial-scale = 1, user-scalable = no" name="viewport">
+
+		<title>LvPlayer</title>
+		<style>
+			html,body{
+				padding: 0;
+				margin: 0;
+			}
+			input[type="file"]{
+				display:none;
+			}
+			nav{
+				background: #777;
+				color: #eee;
+				height: 50px;
+			}
+			nav button:hover{
+				color: white;
+			}
+			nav button:disabled{
+				color: #666;
+			}
+			nav button{
+				width: auto;
+				background: transparent;
+				border: none;
+				border-right: solid 1px #eee;
+				color: #eee;
+				height: 50px;
+				padding: 10px;
+				font-size: 1em;
+			}
+			
+			/*
+			*	Player
+			*/
+			.body{
+				position: absolute;
+				top:50px;
+				right: 0;
+				left:0;
+				bottom: 0;
+			}
+			.body video{
+				max-width: 100%;
+			}
+		</style>
+		
+		<script src="videosub.js"></script>
+	</head>
+	<body>
+		<input 	id="video-src" type="file"/>
+		<input 	id="srt-src" type="file"/>
+		
+		<nav>
+			<button id="video-src-button">
+				Видео...
+			</button>
+			<button id="srt-src-button" disabled="disabled">
+				Субтитры...
+			</button>
+		</nav>
+		<div class="body">
+			<div id="video-container">
+				<video id="player" controls>
+					<track id="srt-node" kind="subtitle" srclang="en-US" label="English" src="sample.srt"/>			
+				</video>
+				<div class="videosubbar" id="subcontainer"></div>
+			</div>		
+		</div>
+		
+		<audio 	id="audio"></audio>
+		<div 	id="status"></div>
+		<script>
+			var videoOutput = document.getElementById( 'player' );
+			var statusNode 	= document.getElementById( 'status');
+			var inputButtonNode = document.getElementById( 'video-src-button');
+			var inputSrtButtonNode = document.getElementById( 'srt-src-button');
+			var inputSrtNode = document.getElementById('srt-src');
+			
+			var srtNode = document.getElementById('srt-node');
+				
+			(function localFileVideoPlayerInit(win, videoOutput) {
+				var URL = win.URL || win.webkitURL,
+					displayMessage = function( node, isError, message ) {
+						var node = node || document.getElementById('status');
+						if(!node)
+							throw {
+								exception: 1,
+								message: 'VIDEO_NODE_NOT_FOUND'
+							};
+						
+						var message = message || '';
+						var isError = isError || true;
+						
+						node.innerHTML = message;
+						node.className = isError ? 'error' : 'info';
+					};
+				
+				var playSelectedFile = function ( event ) {
+					console.log( event );
+					var file = event.target.files[0];
+					var type = file.type;
+					var videoNode = videoOutput || document.getElementById( 'player' );
+					console.log(videoNode)
+					var canPlay = videoNode.canPlayType( type );
+					
+					displayMessage( statusNode, !canPlay, canPlay ? 'ok' : 'error' );
+
+					if (!canPlay || !file) {
+						return;
+					} else {
+						inputSrtButtonNode.disabled = false
+					}
+
+					var fileURL = URL.createObjectURL(file);
+
+					videoNode.src = fileURL;
+				}
+				
+				var playSelectedSrt = function( event ){
+					var file = event.target.files[0];
+					console.log(file)
+					var type = file.type;
+					var fileURL = URL.createObjectURL( file );
+					srtNode.src = fileURL;
+					v();
+				}
+				var inputNode = document.getElementById('video-src');
+																																																																																																																																																																																																																																																																																												  
+				if (!URL) {
+					displayMessage(statusNode, 'Your browser is not ' + 
+					   '<a href="http://caniuse.com/bloburls">supported</a>!', true);
+					
+					return;
+				}                
+				
+			var selectFile = function() {
+				document.getElementById('video-src').click()
+			}
+			var selectSrt = function() {
+				document.getElementById('srt-src').click()
+			}
+																																																																																																																																																																																																																																																																																												  
+			inputNode.addEventListener('change', playSelectedFile, false);
+			inputSrtNode.addEventListener('change', playSelectedSrt, false);
+			
+			inputButtonNode.addEventListener('click', selectFile, false);
+			inputSrtButtonNode.addEventListener('click', selectSrt, false);
+		}(window, videoOutput));
+
+
+		</script>
+	</body>
+</html>
+

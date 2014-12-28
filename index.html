@@ -41,7 +41,7 @@
 			*/
 			.body{
 				position: absolute;
-				top:50px;
+				top:70px;
 				right: 0;
 				left:0;
 				bottom: 0;
@@ -101,6 +101,8 @@
 						node.innerHTML = message;
 						node.className = isError ? 'error' : 'info';
 					};
+					
+					window.dm = displayMessage
 				
 				var playSelectedFile = function ( event ) {
 					console.log( event );
@@ -124,12 +126,14 @@
 				}
 				
 				var playSelectedSrt = function( event ){
+					setTimeout(function(){
 					var file = event.target.files[0];
 					console.log(file)
 					var type = file.type;
 					var fileURL = URL.createObjectURL( file );
-					srtNode.src = fileURL;
+					document.getElementById('srt-node').setAttribute('src', fileURL);
 					v();
+				}, 1000)
 				}
 				var inputNode = document.getElementById('video-src');
 																																																																																																																																																																																																																																																																																												  
@@ -144,11 +148,13 @@
 				document.getElementById('video-src').click()
 			}
 			var selectSrt = function() {
+				
 				document.getElementById('srt-src').click()
 			}
 																																																																																																																																																																																																																																																																																												  
 			inputNode.addEventListener('change', playSelectedFile, false);
 			inputSrtNode.addEventListener('change', playSelectedSrt, false);
+			//inputSrtNode.onChange = playSelectedSrt
 			
 			inputButtonNode.addEventListener('click', selectFile, false);
 			inputSrtButtonNode.addEventListener('click', selectSrt, false);

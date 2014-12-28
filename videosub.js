@@ -70,7 +70,6 @@
 				// first we check if the object is not empty, if the object has child nodes
 				var children = el.childNodes;
 				for (var i = 0; i < children.length; i++) {
-					console.log('!!')
 					if (children[i].nodeName.toLowerCase() == 'track') {
 						subtitlesrc = $VIDEOSUB(children[i]).attr('src');
 					}
@@ -78,7 +77,7 @@
 				};
 			};
 			
-			
+			//alert('Lalala')
 			if (true /*subtitlesrc.indexOf('.srt') != -1*/) {									// we have a track tag and it's a .srt file
 				var videowidth = $VIDEOSUB(el).attr('width');							// set subtitle div as wide as video
 				var fontsize = 17;
@@ -112,12 +111,12 @@
 	
 				// called on AJAX load onComplete (to work around element reference issues)
 				el.update = function(req) { 
-					console.log('UPD')
+					dm(false, false, 'UPDATE')
 					el.subtitles = new Array();
-					records = req.split(/^\s*\n/gm);
+					records = req.split(/^\s*\r\n/gm);
 					console.log(records);
 					for (var r=0;r<records.length;r++) {
-						record = records[r];
+						record = records[r].split('\r').join('');
 						el.subtitles[r] = new Array();
 						el.subtitles[r][0] = record.substr( 0, record.indexOf('\n'));
 						var t = record.substr(record.indexOf('\n') + 1, record.length-1 );
@@ -125,12 +124,11 @@
 						t = t.substr(t.indexOf('\n') + 1, t.length-1 );
 						t = t.split('\n').join('<br/>');				
 						el.subtitles[r][2] = t;
-												
+						dm(false, false, r + '/' + records.length)				
 					}
-					console.log(el.subtitles)
+					//alert('done');
 				}
 					
-				console.log('AJAX')
 				// load the subtitle file
 				/*$VIDEOSUB.ajax({
 					method: 'get', 
@@ -142,16 +140,18 @@
 				xmlhttp=new XMLHttpRequest();
 				xmlhttp.onreadystatechange=function()
 				  {
-				  if (xmlhttp.readyState==4 && ( xmlhttp.status==200 || xmlhttp.status==0 ) )
+					  //alert(xmlhttp.readyState)
+				  if (xmlhttp.readyState==4  && ( xmlhttp.status==200 || xmlhttp.status==0 ) )
 					{
+						//alert(xmlhttp.status)
+						//alert('going to update')
 					 el.update(xmlhttp.responseText);
 					}
 				  }
 				  xmlhttp.open("GET",subtitlesrc,true);
 				  xmlhttp.send();
 				  console.log(xmlhttp)
-				console.log('AJAX!')
-	
+				
 				el.subcount = 0;
 
 				// add event handler to be called when play button is pressed
@@ -180,7 +180,6 @@
 				$VIDEOSUB(el).addListener('timeupdate', function(an_event){
 					var subtitle = '';
 					// check if the next subtitle is in the current time range
-					console.log(el.subtitles, el.subcount);
 					if (this.currentTime.toFixed(1) > videosub_timecode_min(el.subtitles[el.subcount][1])  &&  this.currentTime.toFixed(1) < videosub_timecode_max(el.subtitles[el.subcount][1])) {
 						subtitle = el.subtitles[el.subcount][2];
 					}

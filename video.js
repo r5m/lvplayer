@@ -137,7 +137,7 @@ function localFileVideoPlayerInit(nodes, win) {
 					
 		//displayMessage( nodes.so, !canPlay, canPlay ? '' : 'Video format is not supported' );
 
-		if (!canPlay || !fileDescriptor.url) {
+		if (!canPlay || !fileDescriptor.url ) {
 			selectFileButton.disabled = true;
 			selectAudioButton.disabled = true;
 			throw {
@@ -150,6 +150,7 @@ function localFileVideoPlayerInit(nodes, win) {
 		}
 
 		videoNode.src = fileDescriptor.url;
+		videoNode.play();
 	}
 					
 	loadSelectedAudio = function( event ){

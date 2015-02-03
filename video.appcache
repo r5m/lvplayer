@@ -1,0 +1,16 @@
+CACHE MANIFEST
+# v2 - 2015-02-03
+
+#pages
+index.html
+
+#scripts
+video.js
+videosub.js
+
+#css
+main.css
+font-awesome.min.css
+
+#icons
+fonts/fontawesome-webfont.woff

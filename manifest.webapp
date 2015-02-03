@@ -1,0 +1,16 @@
+{
+  "name"		: "LocalVideo Player",
+  "description"	: "Video player with support for external subtitles and audio tracks",
+  "appcache_path"	: "/lvplayer/video.appcache?dynamic",	
+  "launch_path"	: "/lvplayer/index.html",
+  "icons"		: {
+		"512": "/lvplayer/img/icon-512.png",
+		"128": "/lvplayer/img/icon-128.png"
+  },
+  "developer"	: {
+		"name": "Mikhael Milikhin",
+		"url": "http://r5m.me"
+  },
+  "default_locale"	: "en",
+  "version"	: "1.0" 
+}

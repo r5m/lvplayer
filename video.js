@@ -67,6 +67,12 @@ function localFileVideoPlayerInit(nodes, win) {
 				exception: 2,
 				message: 'STATUS_NODE_NOT_FOUND'
 			};
+		
+		node.style.display = "block";
+		
+		setTimeout( function(){
+			node.style.display = "none";
+		}, 2000);
 			
 		var isError = isError || false;
 		var message = message || '';						
@@ -129,7 +135,7 @@ function localFileVideoPlayerInit(nodes, win) {
 		var selectAudioButton = nodes.aib;	
 		var canPlay = videoNode.canPlayType( fileDescriptor.type );
 					
-		displayMessage( nodes.so, !canPlay, canPlay ? 'ok' : 'error' );
+		//displayMessage( nodes.so, !canPlay, canPlay ? '' : 'Video format is not supported' );
 
 		if (!canPlay || !fileDescriptor.url) {
 			selectFileButton.disabled = true;
@@ -151,7 +157,7 @@ function localFileVideoPlayerInit(nodes, win) {
 		var audioNode = nodes.ao;
 		var canPlay = audioNode.canPlayType( fileDescriptor.type );
 					
-		displayMessage( nodes.so, !canPlay, canPlay ? 'ok' : 'error' );
+		//displayMessage( nodes.so, !canPlay, canPlay ? 'ok' : 'error' );
 
 		if (!canPlay || !fileDescriptor.url) {
 			throw {

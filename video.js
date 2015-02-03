@@ -142,7 +142,7 @@ function localFileVideoPlayerInit(nodes, win) {
 			selectAudioButton.disabled = true;
 			throw {
 				exception: 4,
-				message: 'FILE_NOT_SUPPORTED'
+				message: 'VIDEO_FORMAT_NOT_SUPPORTED'
 			};
 		} else {
 			selectFileButton.disabled = false;
@@ -162,7 +162,7 @@ function localFileVideoPlayerInit(nodes, win) {
 		if (!canPlay || !fileDescriptor.url) {
 			throw {
 				exception: 4,
-				message: 'FILE_NOT_SUPPORTED'
+				message: 'AUDIO_FORMAT_NOT_SUPPORTED'
 			};
 		}
 		
@@ -202,6 +202,8 @@ function localFileVideoPlayerInit(nodes, win) {
 		document.getElementById('subcontainer').style.display = 'none';
 		nodes.sib.removeEventListener ( 'click', disableSrt, false );
 		nodes.sib.addEventListener('click', selectSrt, false);
+		nodes.to.setAttribute('src', 'sample.srt');
+		v();
 	}
 				
 	var loadSelectedTrack = function( event ){
@@ -301,11 +303,20 @@ function localFileVideoPlayerInit(nodes, win) {
 	//nodes.sib.addEventListener('click', closeMenu, false);
 	//nodes.aib.addEventListener('click', closeMenu, false);
 	document.body.addEventListener('click', closeMenu, false);
-				
-				
 };
 		
-		
+window.onerror = function(){
+	var e = arguments [4];
+	document.getElementById('player').pause();
+	alert( 
+		"Oops. "+
+		"\r\nMaybe you are trying to play unsupported video OR" +
+		" your browser is not supported. "+
+		"\r\nJust try again if you sure that everything is Ok." +
+		"\r\nError description: " + (e.message ? e.message : "unknown error") )
+	return true
+}
+
 localFileVideoPlayerInit (
 	{
 		//output

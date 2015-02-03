@@ -85,27 +85,17 @@
 					fontsize = fontsize + Math.ceil((videowidth - 400) / 100);
 				}
 				var videocontainer = document.getElementById("video-container");
-				$VIDEOSUB(videocontainer).css({
+				/*$VIDEOSUB(videocontainer).css({
 					'position': "relative"
-				});
+				});*/
 				// wrap the existing video into the new container
 				//videocontainer.appendChild(el.cloneNode(true)); 
 				//el.parentNode.replaceChild(videocontainer, el);
 				//el = videocontainer.firstChild;
 				var subcontainer = w.document.getElementById("subcontainer");
-				$VIDEOSUB(subcontainer).css({
-					'position': 'absolute',
-					'bottom': '34px',
-					'width': (videowidth-50)+'px',
-					'padding': '0 25px 0 25px',
-					'textAlign': 'center',
-					'backgroundColor': 'transparent',
-					'color': '#ffffff',
-					'fontFamily': 'Helvetica, Arial, sans-serif',
-					'fontSize': fontsize+'px',
-					'fontWeight': 'bold',
-					'textShadow': '-1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black'
-				});
+				//$VIDEOSUB(subcontainer).css({
+					
+			//	});
 				//$VIDEOSUB(subcontainer).addClass('videosubbar');
 				//$VIDEOSUB(subcontainer).appendTo(videocontainer);
 	
@@ -113,7 +103,10 @@
 				el.update = function(req) { 
 					dm(false, false, 'UPDATE')
 					el.subtitles = new Array();
-					records = req.split(/^\s*\r\n/gm);
+					
+					req = req.split('\r\n').join('\n');
+						
+					records = req.split(/^\s*\n/gm);
 					console.log(records);
 					for (var r=0;r<records.length;r++) {
 						record = records[r].split('\r').join('');
@@ -124,7 +117,7 @@
 						t = t.substr(t.indexOf('\n') + 1, t.length-1 );
 						t = t.split('\n').join('<br/>');				
 						el.subtitles[r][2] = t;
-						dm(false, false, r + '/' + records.length)				
+						dm(false, false, parseInt(( r / (records.length -1) ) * 100) + "%")
 					}
 					//alert('done');
 				}

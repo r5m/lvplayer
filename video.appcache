@@ -2,15 +2,15 @@ CACHE MANIFEST
 # v3 - 2015-02-03
 
 #pages
-/index.html
+index.html
 
 #scripts
-/video.js
-/videosub.js
+video.js
+videosub.js
 
 #css
-/css/main.css
-/css/font-awesome.min.css
+css/main.css
+css/font-awesome.min.css
 
 #icons
-/fonts/fontawesome-webfont.woff
+fonts/fontawesome-webfont.woff

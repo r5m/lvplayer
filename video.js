@@ -183,6 +183,9 @@ function localFileVideoPlayerInit(nodes, win) {
 					
 		nodes.aib.removeEventListener ( 'click', selectAudio, false );
 		nodes.aib.addEventListener('click', disableAudio, false);				
+		
+		if(!nodes.vo.paused)
+			playAll();
 	}
 				
 	var disableAudio = function(){
@@ -190,11 +193,16 @@ function localFileVideoPlayerInit(nodes, win) {
 		nodes.ao.volume = 0;
 					
 		nodes.vo.removeEventListener('play', playAll, false);
+		nodes.vo.removeEventListener('playing', playAll, false);
 		nodes.vo.removeEventListener('seeking', syncAudioVideo, false);
 		nodes.vo.removeEventListener('seeked', syncAudioVideo, false);
 		nodes.vo.removeEventListener('pause', pauseAll, false);
 				
 		nodes.aib.innerHTML = "<i class='fa fa-file-sound-o'></i> Add audio track..."
+		
+		nodes.aib.removeEventListener('click', disableAudio, false);				
+		nodes.aib.addEventListener ( 'click', selectAudio, false );
+		
 							
 	}
 				
@@ -304,6 +312,30 @@ function localFileVideoPlayerInit(nodes, win) {
 	//nodes.sib.addEventListener('click', closeMenu, false);
 	//nodes.aib.addEventListener('click', closeMenu, false);
 	document.body.addEventListener('click', closeMenu, false);
+	
+	if(window.navigator.mozApps){
+		var url = 'http://r5m.github.io/video/manifest.webapp?dynamic';
+		var requestToCheck = window.navigator.mozApps.checkInstalled( url );
+		
+		requestToCheck.onsuccess = function(){
+			console.log( requestToCheck )
+			if(requestToCheck.result) {
+				document.getElementById( 'install-button' ).style.display = "none";
+			} else {
+				document.getElementById( 'install-button' ).style.display = "block";
+				document.getElementById( 'install-button' ).onclick = function(){
+					var requestToInstall = window.navigator.mozApps.install( url );
+					requestToInstall.onerror = function (){
+						alert('Installation failed, error:' + this.error.name);
+					}
+					requestToInstall.onsuccess = function (){
+						alert('Application installed successfully');
+					}
+				}
+			}
+		}
+		
+	}
 };
 		
 window.onerror = function(){

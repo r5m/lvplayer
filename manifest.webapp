@@ -5,8 +5,8 @@
   "launch_path"	: "/lvplayer/index.html",
   "icons"		: {
 		"512": "/lvplayer/icons/ic_launcher_512.png",
-		"192": "/lvplayer/icons/ic_launcher_512.png",
-		"144": "/lvplayer/icons/ic_launcher_512.png",
+		"192": "/lvplayer/icons/ic_launcher_192.png",
+		"144": "/lvplayer/icons/ic_launcher_144.png",
 		"128": "/lvplayer/icons/ic_launcher_128.png"
   },
   "developer"	: {

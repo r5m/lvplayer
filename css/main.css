@@ -221,8 +221,8 @@ ol ul li, ul li{
 }
 
 .fs-button{
-	background: #2C393B;
-	color: #dedede;
+	background: black;
+	color: #aaa;
 	position: absolute;
 	top:0 ;
 	left:0;

@@ -314,7 +314,7 @@ function localFileVideoPlayerInit(nodes, win) {
 	document.body.addEventListener('click', closeMenu, false);
 	
 	if(window.navigator.mozApps){
-		var url = 'http://r5m.github.io/video/manifest.webapp?dynamic';
+		var url = 'http://r5m.github.io/lvplayer/manifest.webapp?dynamic';
 		var requestToCheck = window.navigator.mozApps.checkInstalled( url );
 		
 		requestToCheck.onsuccess = function(){

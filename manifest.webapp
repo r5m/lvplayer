@@ -1,11 +1,13 @@
 {
-  "name"		: "LocalVideo Player",
-  "description"	: "Video player with support for external subtitles and audio tracks",
-  "appcache_path"	: "/lvplayer/video.appcache?dynamic",	
+  "name"		: "EnVideo",
+  "description"	: "Simple video player with support for external .srt subtitles and audio tracks. With EnVideo you can view videos from internal memory or SD-card.",
+  "appcache_path"	: "/lvplayer/video.appcache?dynamic",
   "launch_path"	: "/lvplayer/index.html",
   "icons"		: {
-		"512": "/lvplayer/img/icon-512.png",
-		"128": "/lvplayer/img/icon-128.png"
+		"512": "/lvplayer/icons/ic_launcher_512.png",
+		"192": "/lvplayer/icons/ic_launcher_512.png",
+		"144": "/lvplayer/icons/ic_launcher_512.png",
+		"128": "/lvplayer/icons/ic_launcher_128.png"
   },
   "developer"	: {
 		"name": "Mikhael Milikhin",

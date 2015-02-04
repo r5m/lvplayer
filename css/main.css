@@ -216,7 +216,7 @@ ol ul b {
 	color: white;
 }
 
-ol ul li{
+ol ul li, ul li{
 	margin-bottom: 5px;
 }
 

@@ -151,6 +151,9 @@ function localFileVideoPlayerInit(nodes, win) {
 
 		videoNode.src = fileDescriptor.url;
 		videoNode.play();
+		
+		
+		
 	}
 					
 	loadSelectedAudio = function( event ){
@@ -173,6 +176,7 @@ function localFileVideoPlayerInit(nodes, win) {
 		nodes.vo.addEventListener('seeking', syncAudioVideo, false);
 		nodes.vo.addEventListener('seeked', syncAudioVideo, false);
 		nodes.vo.addEventListener('pause', pauseAll, false);
+			
 				
 		nodes.vo.volume = 0;
 		nodes.ao.volume = 1;
@@ -193,10 +197,12 @@ function localFileVideoPlayerInit(nodes, win) {
 		nodes.ao.volume = 0;
 					
 		nodes.vo.removeEventListener('play', playAll, false);
+		
 		nodes.vo.removeEventListener('playing', playAll, false);
 		nodes.vo.removeEventListener('seeking', syncAudioVideo, false);
 		nodes.vo.removeEventListener('seeked', syncAudioVideo, false);
 		nodes.vo.removeEventListener('pause', pauseAll, false);
+		
 				
 		nodes.aib.innerHTML = "<i class='fa fa-file-sound-o'></i> Add audio track..."
 		
@@ -313,6 +319,60 @@ function localFileVideoPlayerInit(nodes, win) {
 	//nodes.aib.addEventListener('click', closeMenu, false);
 	document.body.addEventListener('click', closeMenu, false);
 	
+	var playButton = document.getElementById('play')
+	playButton.addEventListener('click', function(){
+		nodes.vo.paused ? playAll() : pauseAll() ;
+	}, false)
+	
+	var updateTimingInterval;
+	var getTimeFromSeconds = function( t ){
+				var seconds = parseInt(t);
+				
+				var minutes = parseInt(t / 60);
+				
+				seconds = (seconds - minutes*60);
+				seconds = ( seconds < 10 ) ? ( "0" + seconds ) : seconds;
+				var time = minutes + ":" + seconds
+				
+				return time;
+			}
+			
+	var seeker = document.getElementById('seeker');
+	seeker.addEventListener('change', function( ){
+		//console.log(nodes.vo.duration / 100 * value);
+		if(!isNaN(nodes.vo.duration / 100 * seeker.valueAsNumber)){
+			nodes.vo.currentTime = nodes.vo.duration / 100 * seeker.valueAsNumber;
+			document.getElementById ('now').innerHTML = getTimeFromSeconds(nodes.vo.currentTime);
+			document.getElementById ('of-all').innerHTML = getTimeFromSeconds(nodes.vo.duration);				
+		}
+	}, false)
+		
+		nodes.vo.addEventListener('play', function(){
+			var playButton=document.getElementById('play')
+			playButton.classList.add('pause')
+			
+			updateTimingInterval = setInterval( function(){
+				seeker.value = parseInt( nodes.vo.currentTime / nodes.vo.duration * 100 )
+				document.getElementById ('now').innerHTML = getTimeFromSeconds(nodes.vo.currentTime);
+				document.getElementById ('of-all').innerHTML = getTimeFromSeconds(nodes.vo.duration);				
+			}, 1000);
+		}, false);
+		
+		nodes.vo.addEventListener('pause', function(){
+			var playButton=document.getElementById('play')
+			playButton.classList.remove('pause');
+			
+			if(updateTimingInterval)
+			clearInterval(updateTimingInterval);
+		}, false);		
+		
+		nodes.vo.addEventListener('click', function(){
+			document.getElementById('video-container').classList [ 
+				(document.getElementById('video-container').classList.contains(
+					'shown-controls')) ? "remove" : "add" ] ('shown-controls')
+		})
+	
+	
 	if(window.navigator.mozApps){
 		var url = 'http://r5m.github.io/lvplayer/manifest.webapp?dynamic';
 		var requestToCheck = window.navigator.mozApps.checkInstalled( url );
@@ -347,7 +407,7 @@ window.onerror = function(){
 		" your browser is not supported. "+
 		"\r\nJust try again if you sure that everything is Ok." +
 		"\r\nError description: " + (e.message ? e.message : "unknown error") )
-	return true
+	//return true
 }
 
 localFileVideoPlayerInit (

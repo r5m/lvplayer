@@ -58,7 +58,18 @@
 				</video>
 				<div class="videosubbar" id="subcontainer"></div>
 				<div class="controls">
-					<input type="range" min="0" max="100" value="0" step="1"/>
+					<div style="padding: 20px;">
+						<button id="play">
+							<i class="fa fa-play"></i>
+						</button>
+						<div class="time">
+							<span id="now">0:00</span> /  
+							<span id="of-all">0:00</span>
+						</div>
+						<div class="ranger">
+							<input id="seeker" type="range" min="0" max="100" value="0" step="1"/>
+						</div>
+					</div>					
 				</div>
 			</div>			
 		</div>
@@ -72,6 +83,7 @@
 						<p>
 							<ul>
 								<li>Supported video formats are the same as for standard "Video" app</li>
+								<li>Video controls are on the bottom. :-) Click on video to show/hide them</li>
 							</ul>
 						</p>
 					</li>

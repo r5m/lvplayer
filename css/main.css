@@ -134,6 +134,14 @@ nav button:disabled{
 	
 }
 
+#video-container .controls{
+	height: 5px;
+}
+
+#video-container .controls:hover, #video-container.shown-controls .controls{
+	height: auto
+}
+
 #video-container.full-width{
 	top: 50px;
 	bottom:0;
@@ -197,7 +205,7 @@ nav button:disabled{
 	position:absolute; 
 	z-index: 12; 
 	margin: 10px;
-	bottom: 0;
+	bottom: 80px;
 	top: 50px; 
 	overflow: auto;
 	display: none;

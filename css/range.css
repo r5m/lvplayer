@@ -19,11 +19,18 @@
 	height:40px;
 	width:40px;
 	cursor: pointer;
-	background: #ccc
+	background: #ccc;
+	color: #1c2224;
+	border: none;
 }
 
 #play.pause i.fa.fa-play:before{
 	content: ""
+}
+
+#play i {
+	margin	: 1px 0 0 3px;
+	padding	: 0;
 }
 
 .time{
@@ -121,7 +128,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #367ebd;
+  background: #ccc;
 }
 
 input[type=range]::-moz-range-track {

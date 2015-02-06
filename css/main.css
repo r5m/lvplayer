@@ -139,13 +139,15 @@ nav button:disabled{
 }
 #video-container .controls{
 	height: 5px;
+	background: black;
 }
 
 #video-container .controls:hover .time, #video-container.shown-controls .controls .time{
 	display: block;
 }
 #video-container .controls:hover, #video-container.shown-controls .controls{
-	height: auto
+	height: auto;
+	background: #1c2224
 }
 
 #video-container.full-width{

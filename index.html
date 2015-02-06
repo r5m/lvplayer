@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="video.appcache">
+<html ><!--manifest="video.appcache"-->
 	<head>
 		<meta charset="utf-8"/>
 		<meta content="yes" name="apple-mobile-web-app-capable">
@@ -9,6 +9,7 @@
 		<link rel="icon" href="favicon.ico" />		
 		<script src="videosub.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="css/range.css"/>
 		<link href="css/font-awesome.min.css" rel="stylesheet"/>
 
 	</head>
@@ -52,10 +53,13 @@
 			
 			<div id="video-container" class="full-width">
 				<button id="cancelFullScreen" class="fs-button"><i class="fa fa-compress"></i></button>
-				<video id="player" controls>
+				<video id="player">
 					<track id="srt-node" kind="subtitle" srclang="en-US" label="English" src="sample.srt"/>			
 				</video>
 				<div class="videosubbar" id="subcontainer"></div>
+				<div class="controls">
+					<input type="range" min="0" max="100" value="0" step="1"/>
+				</div>
 			</div>			
 		</div>
 		<audio 	id="audio"></audio>

@@ -45,7 +45,8 @@ input[type=range] {
   width: 100%; /* Specific width is required for Firefox. */
   margin: 0 0 0 0;
   height: 40px;
-  background: none transparent;
+  background: transparent;
+  border: none;
 }
 
 input[type=range]::-webkit-slider-thumb {

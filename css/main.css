@@ -134,10 +134,16 @@ nav button:disabled{
 	
 }
 
+#video-container .controls .time{
+	display: none;
+}
 #video-container .controls{
 	height: 5px;
 }
 
+#video-container .controls:hover .time, #video-container.shown-controls .controls .time{
+	display: block;
+}
 #video-container .controls:hover, #video-container.shown-controls .controls{
 	height: auto
 }

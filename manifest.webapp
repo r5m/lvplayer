@@ -1,5 +1,5 @@
 {
-  "name"		: "EnVideo",
+  "name"		: "EnPlayer",
   "description"	: "Simple video player with support for external .srt subtitles and audio tracks. With EnVideo you can view videos from internal memory or SD-card.",
   "appcache_path"	: "/lvplayer/video.appcache?dynamic",
   "launch_path"	: "/lvplayer/index.html",

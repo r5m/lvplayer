@@ -154,10 +154,9 @@ function localFileVideoPlayerInit(nodes, win) {
 		disableAudio();
 		
 		
-		videoNode.src = fileDescriptor.url;
-		
-		videoNode.currentTime = 0;
-		videoNode.play();
+		videoNode.src = fileDescriptor.url;		
+		videoNode.load();
+		playAll();
 	}
 	
 	loadSelectedAudio = function( event ){
@@ -413,7 +412,7 @@ window.onerror = function(){
 		" your browser is not supported. "+
 		"\r\nJust try again if you sure that everything is Ok." +
 		"\r\nError description: " + (e.message ? e.message : "unknown error") )
-	//return true
+	return true
 }
 
 localFileVideoPlayerInit (

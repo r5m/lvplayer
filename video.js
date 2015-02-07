@@ -152,6 +152,7 @@ function localFileVideoPlayerInit(nodes, win) {
 		
 		disableSrt();
 		disableAudio();
+		videoNode.currentTime = 0;
 		
 		videoNode.src = fileDescriptor.url;
 		videoNode.play();

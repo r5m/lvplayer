@@ -244,3 +244,8 @@ ol ul li, ul li{
 	right:0;
 	padding: 10px;
 }
+
+
+#status{
+	display: none;
+}

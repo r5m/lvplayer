@@ -107,7 +107,7 @@
 					req = req.split('\r\n').join('\n');
 						
 					records = req.split(/^\s*\n/gm);
-					console.log(records);
+					
 					for (var r=0;r<records.length;r++) {
 						record = records[r].split('\r').join('');
 						el.subtitles[r] = new Array();
@@ -143,18 +143,20 @@
 				  }
 				  xmlhttp.open("GET",subtitlesrc,true);
 				  xmlhttp.send();
-				  console.log(xmlhttp)
 				
 				el.subcount = 0;
 
 				// add event handler to be called when play button is pressed
 				$VIDEOSUB(el).addListener('play', function(an_event){
 					el.subcount = 0;
-					while (videosub_timecode_max(el.subtitles[el.subcount][1]) < this.currentTime.toFixed(1)) {
-						el.subcount++;
-						if (el.subcount > el.subtitles.length-1) {
-							el.subcount = el.subtitles.length-1;
-							break;
+					if(el.subtitles && el.subtitles.length){
+					
+						while (videosub_timecode_max(el.subtitles[el.subcount][1]) < this.currentTime.toFixed(1)) {
+							el.subcount++;
+							if (el.subcount > el.subtitles.length-1) {
+								el.subcount = el.subtitles.length-1;
+								break;
+							}
 						}
 					}
 				});

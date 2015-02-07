@@ -149,7 +149,10 @@ function localFileVideoPlayerInit(nodes, win) {
 			selectFileButton.disabled = false;
 			selectAudioButton.disabled = false;
 		}
-
+		
+		disableSrt();
+		disableAudio();
+		
 		videoNode.src = fileDescriptor.url;
 		videoNode.play();
 	}

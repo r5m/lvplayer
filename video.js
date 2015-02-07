@@ -71,7 +71,7 @@ function localFileVideoPlayerInit(nodes, win) {
 				message: 'STATUS_NODE_NOT_FOUND'
 			};
 		
-		node.style.display = "block";
+		//node.style.display = "block";
 		
 		setTimeout( function(){
 			node.style.display = "none";

@@ -150,6 +150,13 @@
 				// add event handler to be called when play button is pressed
 				$VIDEOSUB(el).addListener('play', function(an_event){
 					el.subcount = 0;
+					while (videosub_timecode_max(el.subtitles[el.subcount][1]) < this.currentTime.toFixed(1)) {
+						el.subcount++;
+						if (el.subcount > el.subtitles.length-1) {
+							el.subcount = el.subtitles.length-1;
+							break;
+						}
+					}
 				});
 
 				// add event handler to be called when video is done

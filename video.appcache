@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v57 - 2015-02-04
+# v1.2.0.60- 2015-02-04
 
 #pages
 index.html
@@ -10,6 +10,7 @@ videosub.js
 
 #css
 css/main.css
+css/range.css
 css/font-awesome.min.css
 
 #icons
@@ -17,3 +18,4 @@ fonts/fontawesome-webfont.woff
 
 #samples
 sample.srt
+

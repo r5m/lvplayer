@@ -15,18 +15,21 @@ indent_mode=2
 [project]
 name=Enhanced player
 base_path=/var/www/html/htdocs/video/
+description=
 
 [long line marker]
 long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=4
-FILE_NAME_0=1183;HTML;0;EUTF-8;1;1;0;%2Fvar%2Fwww%2Fhtml%2Fhtdocs%2Fvideo%2Findex.html;0;4
-FILE_NAME_1=728;CSS;0;EUTF-8;1;1;0;%2Fvar%2Fwww%2Fhtml%2Fhtdocs%2Fvideo%2Fcss%2Frange.css;0;4
+current_page=6
+FILE_NAME_0=26;HTML;0;EUTF-8;1;1;0;%2Fvar%2Fwww%2Fhtml%2Fhtdocs%2Fvideo%2Findex.html;0;4
+FILE_NAME_1=413;CSS;0;EUTF-8;1;1;0;%2Fvar%2Fwww%2Fhtml%2Fhtdocs%2Fvideo%2Fcss%2Frange.css;0;4
 FILE_NAME_2=0;CSS;0;EUTF-8;1;1;0;%2Fvar%2Fwww%2Fhtml%2Fhtdocs%2Fvideo%2Fcss%2Ffont-awesome.min.css;0;4
 FILE_NAME_3=166;None;0;EUTF-8;1;1;0;%2Fvar%2Fwww%2Fhtml%2Fhtdocs%2Fvideo%2Fvideo.appcache;0;4
-FILE_NAME_4=2396;CSS;0;EUTF-8;1;1;0;%2Fvar%2Fwww%2Fhtml%2Fhtdocs%2Fvideo%2Fcss%2Fmain.css;0;4
+FILE_NAME_4=1912;CSS;0;EUTF-8;1;1;0;%2Fvar%2Fwww%2Fhtml%2Fhtdocs%2Fvideo%2Fcss%2Fmain.css;0;4
+FILE_NAME_5=10175;Javascript;0;EUTF-8;1;1;0;%2Fvar%2Fwww%2Fhtml%2Fhtdocs%2Fvideo%2Fvideo.js;0;4
+FILE_NAME_6=625;None;0;EUTF-8;1;1;0;%2Fvar%2Fwww%2Fhtml%2Fhtdocs%2Fvideo%2Fmanifest.webapp;0;4
 
 [VTE]
-last_dir=/home/mikhael
+last_dir=/var/www/html/htdocs/video

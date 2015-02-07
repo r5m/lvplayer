@@ -176,7 +176,7 @@ nav button:disabled{
 
 #subcontainer{
 	position: absolute;
-	bottom: 34px;
+	bottom: 10px;
 	left: 25px;
 	right: 25px;
 	padding: 0 25px 0 25px;
@@ -184,7 +184,7 @@ nav button:disabled{
 	background-color: transparent;
 	color: #ffffff;
 	font-family: Helvetica, Arial, sans-serif;
-	font-size: 2rem;
+	font-size: 1rem;
 	font-weight: bold;
 	text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
 
@@ -213,7 +213,7 @@ nav button:disabled{
 	position:absolute; 
 	z-index: 12; 
 	margin: 10px;
-	bottom: 80px;
+	bottom: 10px;
 	top: 50px; 
 	overflow: auto;
 	display: none;

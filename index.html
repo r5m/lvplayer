@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ><!--manifest="video.appcache"-->
+<html manifest="video.appcache">
 	<head>
 		<meta charset="utf-8"/>
 		<meta content="yes" name="apple-mobile-web-app-capable">
@@ -19,15 +19,18 @@
 			<button class="right-button bordered" id="fullscreen-button" title="Toggle full screen mode">
 				<i class="fa fa-arrows-alt"></i>
 			</button>
-			<button class="right-button bordered" id="nat-width-button"  title="Toggle Fit-Screen / Natural scale">
+			<button 
+				class="right-button bordered" 
+				id="nat-width-button" 
+				style="display:none;"
+				title="Toggle Fit-Screen / Natural scale">
 				<!--<i class="fa fa-compress"></i>-->1:1
 			</button>			
-			<button class="right-button" id="help-button" title="Help">
-				<i class="fa fa-question"></i>
-				
+			<button class="right-button" id="help-button" title="Help" style="width: auto;">
+				<i class="fa fa-question"></i> Help		
 			</button>
 			
-			<h1>EnPlayer<!--<span style="font-size:0.7em">v0.2</span>--></h1>
+			<h1>EnPlayer <sub style="color: #ccc">v1.2.0</sub><!--<span style="font-size:0.7em">v0.2</span>--></h1>
 		</header>
 		<input 	id="video-src" type="file"/>
 		<input 	id="srt-src" type="file" accept=".txt"/>
@@ -79,11 +82,12 @@
 			<div class="help-content">
 				<h2>How does it work?</h2>
 				<ol style="padding-left:20px">
-					<li>Open video file 
+					<li>Click on menu button <i style="margin: 0 5px;" class="fa fa-bars"></i> to open video
 						<p>
 							<ul>
 								<li>Supported video formats are the same as for standard "Video" app</li>
-								<li>Video controls are on the bottom. :-) Click on video to show/hide them</li>
+								<li>Video controls are on the bottom. Click on video to show/hide them</li>
+								<li>Fullscreen button is on the top right corner</li>
 							</ul>
 						</p>
 					</li>

@@ -2,6 +2,7 @@
  * Cross-browser console.log wrapper
  * If no console.log throw alert;
  */
+var byId = document.getElementById.bind(document);
 
 var isDebug = true;
 var log = 
@@ -31,6 +32,8 @@ var log =
 */
 			
 function localFileVideoPlayerInit(nodes, win) {
+	"use strict";
+	
 	var win = win || window;
 	var URL;
 	
@@ -84,7 +87,6 @@ function localFileVideoPlayerInit(nodes, win) {
 	//TODO: Remove;
 	window.dm = displayMessage
 	
-	
 	/*
 	 * Create URL for file selected with input tag
 	 */ 
@@ -108,7 +110,6 @@ function localFileVideoPlayerInit(nodes, win) {
 	}
 				
 	
-				
 	//sync audio/video
 	var syncAudioVideo = function(){
 		nodes.ao.currentTime = nodes.vo.currentTime;
@@ -151,11 +152,8 @@ function localFileVideoPlayerInit(nodes, win) {
 
 		videoNode.src = fileDescriptor.url;
 		videoNode.play();
-		
-		
-		
 	}
-					
+	
 	loadSelectedAudio = function( event ){
 		var fileDescriptor = createUrlForLocalFile(event);
 		var audioNode = nodes.ao;
@@ -177,12 +175,11 @@ function localFileVideoPlayerInit(nodes, win) {
 		nodes.vo.addEventListener('seeked', syncAudioVideo, false);
 		nodes.vo.addEventListener('pause', pauseAll, false);
 			
-				
+		audioNode.setAttribute('src', fileDescriptor.url);
+		
 		nodes.vo.volume = 0;
 		nodes.ao.volume = 1;
-								
-		audioNode.setAttribute('src', fileDescriptor.url);
-					
+		
 		nodes.aib.innerHTML = '<i class="fa fa-close"></i> Disable external audio...'
 					
 		nodes.aib.removeEventListener ( 'click', selectAudio, false );
@@ -203,13 +200,10 @@ function localFileVideoPlayerInit(nodes, win) {
 		nodes.vo.removeEventListener('seeked', syncAudioVideo, false);
 		nodes.vo.removeEventListener('pause', pauseAll, false);
 		
-				
 		nodes.aib.innerHTML = "<i class='fa fa-file-sound-o'></i> Add audio track..."
 		
-		nodes.aib.removeEventListener('click', disableAudio, false);				
+		nodes.aib.removeEventListener('click', disableAudio, false);
 		nodes.aib.addEventListener ( 'click', selectAudio, false );
-		
-							
 	}
 				
 	var disableSrt = function(){
@@ -231,16 +225,14 @@ function localFileVideoPlayerInit(nodes, win) {
 		trackNode.setAttribute('src', fileURL);
 					
 		v();//init videosub.js
-					
-				
+		
 		nodes.sib.innerHTML = "<i class='fa fa-close'></i> Disable subtitles"
 		nodes.sib.removeEventListener ( 'click', selectSrt, false );
 		nodes.sib.addEventListener('click', disableSrt, false);
 				
 		document.getElementById('subcontainer').style.display = 'block';
-	}																																																																																																																																																																																																																																																																												  
-				              
-					
+	}
+	
 	var selectFile = function() {
 		nodes.vi.click();//document.getElementById('video-src')
 	}
@@ -253,126 +245,134 @@ function localFileVideoPlayerInit(nodes, win) {
 		nodes.ti.click();		
 		//document.getElementById('srt-src').click()
 	}
-																																																																																																																																																																																																																																																																																											  
+	
 	nodes.vi.addEventListener('change', loadSelectedVideo, false);
 	nodes.ti.addEventListener('change', loadSelectedTrack, false);
 	nodes.ai.addEventListener('change', loadSelectedAudio, false);
-				
+	
 	//inputSrtNode.onChange = playSelectedSrt
-		
+	
 	nodes.vib.addEventListener('click', selectFile, false);
-		
 	nodes.aib.addEventListener('click', selectAudio, false);
 	nodes.sib.addEventListener('click', selectSrt, false);
-				
-				
-				
+	
+	/*
+	 * Fullscreen
+	 */ 
 	nodes.fullScreenButton.addEventListener('click', function(){
 		document.getElementById('video-container').classList.add('full-width');
 		document.getElementById('video-container').mozRequestFullScreen();
 		document.getElementById('video-container').classList.add('fullscreen');
 	}, false);
-			
-		
-	document.getElementById('cancelFullScreen').addEventListener('click', function(){
-		document.getElementById('video-container').classList.remove('fullscreen');
+	byId('cancelFullScreen').addEventListener('click', function(){
+		byId('video-container').classList.remove('fullscreen');
 		document.mozCancelFullScreen();
 	}, false)
 	
-	document.getElementById('menu-button').addEventListener('click', function(e){
-		document.getElementById('nav-drawer').classList[
-			document.getElementById('nav-drawer').classList.contains('active') ? 'remove' : 'add'
+	/*
+	 * Menu (Top left)
+	 */ 
+	byId('menu-button').addEventListener('click', function(e){
+		byId('nav-drawer').classList[
+			byId('nav-drawer').classList.contains('active') ? 'remove' : 'add'
 		]('active');
 		e.stopPropagation();
 	}, false);
-				
-	document.getElementById('nat-width-button').addEventListener('click', function(){
-		document.getElementById('video-container').classList[
-			document.getElementById('video-container').classList.contains('full-width') ? 'remove' : 'add'
+	
+	var closeMenu = function(){
+		byId('nav-drawer').classList.remove('active');
+	}
+	
+	document.body.addEventListener('click', closeMenu, false);
+	
+	
+	/*
+	 *	Video scaling 
+	 */ 
+	byId('nat-width-button').addEventListener('click', function(){
+		byId('video-container').classList[
+			byId('video-container').classList.contains('full-width') ? 'remove' : 'add'
 		]('full-width');
-		document.getElementById('nat-width-button').innerHTML = 
-			document.getElementById('video-container').classList.contains('full-width') ? 
+		byId('nat-width-button').innerHTML = 
+			byId('video-container').classList.contains('full-width') ? 
 				'1:1' : '<i class="fa fa-expand">'
 				
 	}, false);
 		
 	
-	
-	document.getElementById('help-button').addEventListener('click', function(){
-		document.getElementById('help-button').classList[
-			document.getElementById('help').classList.contains('visible') ? 'remove' : 'add'
+	/*
+	 * Help
+	 */ 
+	byId('help-button').addEventListener('click', function(){
+		byId('help-button').classList[
+			byId('help').classList.contains('visible') ? 'remove' : 'add'
 		]('help-visible');
 		
-		document.getElementById('help').classList[
-			document.getElementById('help').classList.contains('visible') ? 'remove' : 'add'
+		byId('help').classList[
+			byId('help').classList.contains('visible') ? 'remove' : 'add'
 		]('visible');
 	}, false);
-			
 	
-				
-	var closeMenu = function(){
-		document.getElementById('nav-drawer').classList.remove('active');
-	}
-				
-	//nodes.vib.addEventListener('click', closeMenu, false);
-	//nodes.sib.addEventListener('click', closeMenu, false);
-	//nodes.aib.addEventListener('click', closeMenu, false);
-	document.body.addEventListener('click', closeMenu, false);
-	
-	var playButton = document.getElementById('play')
+	/*
+	 * Video controls
+	 */ 
+	var playButton = byId('play')
 	playButton.addEventListener('click', function(){
 		nodes.vo.paused ? playAll() : pauseAll() ;
 	}, false)
 	
 	var updateTimingInterval;
 	var getTimeFromSeconds = function( t ){
-				var seconds = parseInt(t);
+		var seconds = parseInt(t);
+		var minutes = parseInt(t / 60);
 				
-				var minutes = parseInt(t / 60);
-				
-				seconds = (seconds - minutes*60);
-				seconds = ( seconds < 10 ) ? ( "0" + seconds ) : seconds;
-				var time = minutes + ":" + seconds
-				
-				return time;
-			}
+		seconds = ( seconds - minutes*60 );
+		seconds = ( seconds < 10 ) ? ( "0" + seconds ) : seconds;
+		var time = minutes + ":" + seconds
+
+		return time;
+	}
 			
-	var seeker = document.getElementById('seeker');
+	var seeker = byId('seeker');
 	seeker.addEventListener('change', function( ){
-		//console.log(nodes.vo.duration / 100 * value);
 		if(!isNaN(nodes.vo.duration / 100 * seeker.valueAsNumber)){
 			nodes.vo.currentTime = nodes.vo.duration / 100 * seeker.valueAsNumber;
-			document.getElementById ('now').innerHTML = getTimeFromSeconds(nodes.vo.currentTime);
-			document.getElementById ('of-all').innerHTML = getTimeFromSeconds(nodes.vo.duration);				
+			byId ('now').innerHTML = getTimeFromSeconds(nodes.vo.currentTime);
+			byId ('of-all').innerHTML = getTimeFromSeconds(nodes.vo.duration);				
 		}
 	}, false)
 		
-		nodes.vo.addEventListener('play', function(){
-			var playButton=document.getElementById('play')
-			playButton.classList.add('pause')
+	nodes.vo.addEventListener('play', function(){
+		var playButton = byId('play')
+		playButton.classList.add('pause')
 			
-			updateTimingInterval = setInterval( function(){
-				seeker.value = parseInt( nodes.vo.currentTime / nodes.vo.duration * 100 )
-				document.getElementById ('now').innerHTML = getTimeFromSeconds(nodes.vo.currentTime);
-				document.getElementById ('of-all').innerHTML = getTimeFromSeconds(nodes.vo.duration);				
-			}, 1000);
-		}, false);
+		updateTimingInterval = setInterval( function(){
+			seeker.value = parseInt( nodes.vo.currentTime / nodes.vo.duration * 100 )
+			byId ('now').innerHTML = getTimeFromSeconds(nodes.vo.currentTime);
+			byId ('of-all').innerHTML = getTimeFromSeconds(nodes.vo.duration);				
+		}, 1000);
+	}, false);
 		
-		nodes.vo.addEventListener('pause', function(){
-			var playButton=document.getElementById('play')
-			playButton.classList.remove('pause');
+	nodes.vo.addEventListener('pause', function(){
+		var playButton = byId('play')
+		playButton.classList.remove('pause');
 			
-			if(updateTimingInterval)
+		if(updateTimingInterval)
 			clearInterval(updateTimingInterval);
-		}, false);		
+	}, false);
 		
-		nodes.vo.addEventListener('click', function(){
-			document.getElementById('video-container').classList [ 
-				(document.getElementById('video-container').classList.contains(
-					'shown-controls')) ? "remove" : "add" ] ('shown-controls')
-		})
+	/*
+	 * Show/hide controls
+	 */ 
+	nodes.vo.addEventListener('click', function(){
+		byId('video-container').classList [ 
+			(byId('video-container').classList.contains(
+				'shown-controls')) ? "remove" : "add" ] ('shown-controls')
+	})
 	
-	
+	/*
+	 * Install button
+	 */ 
 	if(window.navigator.mozApps){
 		var url = 'http://r5m.github.io/lvplayer/manifest.webapp?dynamic';
 		var requestToCheck = window.navigator.mozApps.checkInstalled( url );
@@ -380,10 +380,10 @@ function localFileVideoPlayerInit(nodes, win) {
 		requestToCheck.onsuccess = function(){
 			console.log( requestToCheck )
 			if(requestToCheck.result) {
-				document.getElementById( 'install-button' ).style.display = "none";
+				byId( 'install-button' ).style.display = "none";
 			} else {
-				document.getElementById( 'install-button' ).style.display = "block";
-				document.getElementById( 'install-button' ).onclick = function(){
+				byId( 'install-button' ).style.display = "block";
+				byId( 'install-button' ).onclick = function(){
 					var requestToInstall = window.navigator.mozApps.install( url );
 					requestToInstall.onerror = function (){
 						alert('Installation failed, error:' + this.error.name);
